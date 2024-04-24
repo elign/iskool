@@ -2,17 +2,46 @@
 
 Skool - App that simplifies the interaction between teachers and parents.
 
-<!-- ## Table of Contents
+## Table of Contents
 
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+- [Project Name](#project-name)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+    - [Daily Updates](#daily-updates)
+    - [Notifications](#notifications)
+    - [Academic Progress](#academic-progress)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 ## Features
 
-List of key features or functionalities of the project.
+As per the review from the teacher there would be following features in the app:
+
+- Daily Updates
+- Notifications
+- Academic Progress
+
+### Daily Updates
+
+3 sub-sections:
+- Class work
+- Home work
+- Language
+
+### Notifications
+
+3 sub-sections:
+- Monthly Calendar
+- Circular & Notices
+- Club Activity Details
+
+### Academic Progress
+
+3 sub-sections:
+- Class test reports.
+- Exam Results
 
 ## Installation
 
@@ -28,4 +57,4 @@ Guidelines for contributing to the project, including information about how to r
 
 ## License
 
-Information about the project's license. Include the license name and a link to the full license text if applicable. -->
+Information about the project's license. Include the license name and a link to the full license text if applicable.
