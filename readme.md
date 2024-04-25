@@ -23,6 +23,8 @@ As per the review from the teacher there would be following features in the app:
 - Notifications
 - Academic Progress
 
+Refer to this UI link for more info: [App Prototype](https://www.figma.com/proto/4ZUWXlcEtev9MJL6o4wgIL/iskool?type=design&node-id=8-170&t=OwCOQ5ATQwecXijR-1&scaling=scale-down&page-id=0%3A1&starting-point-node-id=8%3A170&mode=design "Iskool app UI")
+
 ### Daily Updates
 
 3 sub-sections:
