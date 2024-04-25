@@ -7,18 +7,18 @@
 
 <Card.Root class="mx-auto max-w-sm bg-opacity-30">
   <Card.Header>
-    <Card.Title class="text-xl">Login</Card.Title>
+    <Card.Title class="text-xl">Sign Up</Card.Title>
     <Card.Description
-      >Click on the button to login to your account</Card.Description
+      >Click on the button to create an account</Card.Description
     >
   </Card.Header>
   <Card.Content>
     <div class="grid gap-4">
-      <Button variant="outline" class="w-full">Login with Google</Button>
+      <Button variant="outline" class="w-full">Sign up with Google</Button>
     </div>
     <div class="mt-4 text-center text-sm">
-      Don&apos;t have an account?
-      <a href="/signup" class="underline">Sign up</a>
+      Already have an account?
+      <a href="/login" class="underline"> Sign in </a>
     </div>
   </Card.Content>
 </Card.Root>
