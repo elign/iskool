@@ -1,6 +1,9 @@
-<script>
+<script lang="ts">
   import Button from "$lib/components/ui/button/button.svelte";
   import AssignmentButton from "./_sections/assignment-button.svelte";
+  import { School, Home, BookA, Book } from "lucide-svelte";
+  import Library from "lucide-svelte/icons/library";
+  import Cog from "lucide-svelte/icons/cog";
 </script>
 
 <main>
@@ -22,8 +25,8 @@
   </section>
 
   <section class="flex justify-between mt-16">
-    <AssignmentButton />
-    <AssignmentButton />
-    <AssignmentButton />
+    <AssignmentButton title="Classwork" url="/" icon={School} />
+    <AssignmentButton title="Homework" url="" icon={Home} />
+    <AssignmentButton title="Language" url="" icon={BookA} />
   </section>
 </main>
