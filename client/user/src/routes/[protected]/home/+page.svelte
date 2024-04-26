@@ -1,5 +1,6 @@
 <script>
   import Button from "$lib/components/ui/button/button.svelte";
+  import AssignmentButton from "./_sections/assignment-button.svelte";
 </script>
 
 <main>
@@ -7,11 +8,22 @@
   <p>Welcome to Shemford online school.</p>
 
   <section
-    class="bg-[url('/images/cover.jpg')]  bg-cover w-full h-48 mt-10 rounded-lg flex items-center "
+    class="bg-[url('/images/cover.jpg')] bg-cover w-full h-44 mt-10 rounded-lg flex items-center"
   >
-    <div class="bg-gradient-to-r from-primary to-transparent h-full w-full rounded-lg p-8">
-      <h2 class="text-white text-xl font-semibold pb-2 w-5/12">Annual Tech Fest 2024</h2>
-      <Button size="sm" variant="secondary" class=" shadow-md">Know More</Button>
+    <div
+      class="bg-gradient-to-r from-primary to-transparent h-full w-full rounded-lg p-8"
+    >
+      <h2 class="text-white text-xl font-semibold pb-2 w-5/12">
+        Annual Tech Fest 2024
+      </h2>
+      <Button size="sm" variant="secondary" class=" shadow-md">Know More</Button
+      >
     </div>
+  </section>
+
+  <section class="flex justify-between mt-16">
+    <AssignmentButton />
+    <AssignmentButton />
+    <AssignmentButton />
   </section>
 </main>
