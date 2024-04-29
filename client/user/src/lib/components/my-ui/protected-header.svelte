@@ -4,7 +4,7 @@
 </script>
 
 <header class="mb-6 flex justify-between items-center">
-  <span class="text-primary text-2xl font-semibold">iskool</span>
+  <a href="/protected" class="text-primary text-2xl font-semibold">iskool</a>
   <DropdownMenu.Root>
     <DropdownMenu.Trigger
       ><UserCircle class="text-primary" size="30" /></DropdownMenu.Trigger
