@@ -12,6 +12,22 @@ const corsOptions = {
   optionSuccessStatus: 200,
 };
 
+if (process.env.NODE_ENV != "test") {
+  try {
+    mongoose.connect(process.env.MONGO_URL, {
+      useUnifiedTopology: true,
+      useNewUrlParser: true,
+    });
+    console.log("Connected to DB successfully!");
+    let today = new Date();
+    let time =
+      today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    console.log(time);
+  } catch {
+    console.error("Error occurred while connecting to DB");
+  }
+}
+
 const app = express();
 app.use(express.json());
 app.use(cors(corsOptions));
