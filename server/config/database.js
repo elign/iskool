@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 
 module.exports = new Sequelize({
   dialect: "mysql",
-  database: process.env.DB_NAME,
+  database: "iskool",
   username: 'iskool',
   password: 'pass',
   host: process.env.DB_HOST,

@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const userRouter = require("./route/userRouter");
 const cors = require("cors");
 const db = require("./config/database");
 require("dotenv").config();
@@ -31,3 +32,4 @@ app.use(cookieParser());
 })();
 
 app.listen(port, () => console.log(`Iskool Backend listening on port ${port}`));
+app.use("/", userRouter);

@@ -1,14 +1,14 @@
 const router = require("express").Router();
-const { verifyToken } = require("../middlewares/verifyToken");
+const { authenticateToken } = require("../middleware/authenticateToken");
 const {
   signUpUser,
   loginUser,
   getUserProfile,
   logOutUser,
-} = require("../controllers/userController");
+} = require("../controller/userController");
 
 router.post("/signup", signUpUser);
 router.post("/login", loginUser);
-router.get("/profile", verifyToken, getUserProfile);
+router.get("/profile", authenticateToken, getUserProfile);
 router.post("/logout", logOutUser);
 module.exports = router;

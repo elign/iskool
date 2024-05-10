@@ -63,6 +63,7 @@ Columns:
 user_id (INT PRIMARY KEY): Unique identifier for the user (parent)
 username (VARCHAR(255)): Username for login
 password (VARCHAR(255)): Hashed password for security (store only the hash)
+role: [Teacher, Admin, Parent]
 (Add other relevant user information like name, email, etc.)
 
 ### Student:
