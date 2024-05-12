@@ -2,21 +2,43 @@ const jwt = require("jsonwebtoken");
 const User = require("../model/userModel");
 
 function authenticateToken(req, res, next) {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1]; // Extract token from 'Bearer <token>' format
+  if (req.headers.cookie) {
+    try {
+      const cookies = req.headers.cookie.split("; ");
+      const tokenCookie = cookies.find((cookie) => cookie.startsWith("token="));
 
-  if (!token) {
-    return res.status(401).json({ message: 'Unauthorized' });
-  }
+      if (tokenCookie) {
+        const token = tokenCookie.split("=")[1];
+        jwt.verify(token, process.env.JWT_SECRET, function (err, decode) {
+          if (err) {
+            req.user = undefined;
+            next();
+          }
 
-  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-    if (err) {
-      return res.status(403).json({ message: 'Forbidden (invalid token)' });
+          User.findOne({
+            _id: decode?.id,
+          })
+            .then((user) => {
+              req.user = user;
+              next();
+            })
+            .catch((err) => {
+              req.user = undefined;
+              next();
+            });
+        });
+      } else {
+        req.user = undefined;
+        next();
+      }
+    } catch (err) {
+      req.user = undefined;
+      next();
     }
-
-    req.user = user; // Store decoded user data for access in profile route
+  } else {
+    req.user = undefined;
     next();
-  });
+  }
 }
 module.exports = {
   authenticateToken,

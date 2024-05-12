@@ -41,7 +41,7 @@ const loginUser = async (req, res) => {
     // Compare provided password with hashed password
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
-      return res.status(401).json({ message: "Invalid email or password" });
+      return res.status(401).json({ message: "Invalid password" });
     }
 
     // Create JWT payload with user ID and role
@@ -60,9 +60,9 @@ const getUserProfile = (req, res) => {
     const user = req.user;
     // Select specific user data to return (exclude sensitive information)
     const profile = {
-      user_id: user.user_id,
-      email: user.email || "not found",
-      role: user.role,
+      user_id: user?.user_id,
+      email: user?.email,
+      role: user?.role,
     };
 
     res.status(200).json({ profile });
@@ -73,7 +73,7 @@ const getUserProfile = (req, res) => {
 };
 
 const logOutUser = (req, res) => {
-  res.cookie("token", "", { maxAge: 0 }); // Expires immediately
+  res.clearCookie("token").json(true);
 };
 
 module.exports = {
