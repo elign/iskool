@@ -1,5 +1,7 @@
 const sequelize = require("../config/database");
 const { DataTypes } = require("sequelize");
+const Class = require("./class.model");
+const Section = require("./section.model");
 
 const Subject = sequelize.define("Subject", {
   subjectId: {
@@ -15,7 +17,7 @@ const Subject = sequelize.define("Subject", {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: "Class",
+      model: Class,
       key: "classId",
     },
   },
@@ -23,13 +25,13 @@ const Subject = sequelize.define("Subject", {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: "Section",
+      model: Section,
       key: "sectionId",
     },
   },
 });
 
-Subject.belongsTo(Class, { foreignKey: 'classId' });
-Subject.belongsTo(Section, { foreignKey: 'sectionId' });
+Subject.belongsTo(Class, { foreignKey: "classId" });
+Subject.belongsTo(Section, { foreignKey: "sectionId" });
 
 module.exports = Section;
