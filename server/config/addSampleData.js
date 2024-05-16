@@ -4,9 +4,10 @@ const Student = require("../model/student.model");
 const Class = require("../model/class.model");
 const Section = require("../model/section.model");
 const Subject = require("../model/subject.model");
+const Notice = require("../model/notice.model");
 const Event = require("../model/event.model");
 const sequelize = require("./database");
-
+const moment = require("moment");
 // Code for production testing
 async function addSampleDataBulk() {
   try {
@@ -288,6 +289,22 @@ async function addSampleDataBulk() {
       await Event.create(sampleEvent);
     }
     console.log(`${numEvents} sample events created successfully!`);
+
+    const numNotices = 10;
+    const notices = [];
+
+    for (let i = 0; i < numNotices; i++) {
+      const notice = {
+        date: moment().add(i, "days").toDate(),
+        title: `Sample Notice Title ${i + 1}`,
+        content: `This is the content of sample notice ${
+          i + 1
+        }. It contains some sample text to demonstrate the structure and format of a notice.`,
+      };
+      await Notice.create(notice);
+    }
+
+    console.log(`Successfully created ${numNotices} sample notices.`);
 
     console.log("Sample data inserted successfully (bulk)!");
   } catch (error) {
