@@ -4,6 +4,7 @@ const Student = require("../model/student.model");
 const Class = require("../model/class.model");
 const Section = require("../model/section.model");
 const Subject = require("../model/subject.model");
+const Event = require("../model/event.model");
 const sequelize = require("./database");
 
 // Code for production testing
@@ -255,6 +256,39 @@ async function addSampleDataBulk() {
     ];
 
     await Student.bulkCreate(students);
+
+    const eventTypes = ["holiday", "festival", "competition", "exam"];
+    const descriptions = [
+      "Day to celebrate national independence.",
+      "A cultural celebration with music, dance, and food.",
+      "A test of skills and knowledge between participants.",
+      "A formal evaluation to assess student learning.",
+    ];
+    const numEvents = 10;
+
+    for (let i = 0; i < numEvents; i++) {
+      // Generate random date within the current month
+      const currentMonth = new Date().getMonth(); // 0-indexed month number
+      const randomDay = Math.floor(Math.random() * 31) + 1; // Random day (1-31)
+      const randomYear = Math.floor(Math.random() * (2025 - 2023 + 1)) + 2023; // Random year (2023-2024)
+
+      // Select random event type and description
+      const eventType =
+        eventTypes[Math.floor(Math.random() * eventTypes.length)];
+      const description =
+        descriptions[Math.floor(Math.random() * descriptions.length)];
+
+      const sampleEvent = {
+        date: new Date(randomYear, currentMonth, randomDay),
+        eventName: `Sample Event ${i + 1}`,
+        description: description,
+        eventType: eventType,
+      };
+
+      await Event.create(sampleEvent);
+    }
+    console.log(`${numEvents} sample events created successfully!`);
+
     console.log("Sample data inserted successfully (bulk)!");
   } catch (error) {
     console.error("Error:", error);
