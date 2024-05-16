@@ -6,7 +6,7 @@ We need routes for the following tasks:
 4. Delete a student from the DB.
 */
 const express = require("express");
-const studentController = require("../controller/student.controller"); // Assuming controllers are in a './controllers' folder
+const studentController = require("../controller/student.controller"); 
 const {
   authenticateTeacherAdminToken,
 } = require("../middleware/authenticateTeacherAdmin");
