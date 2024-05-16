@@ -6,7 +6,7 @@ const Section = require("../model/section.model");
 const Subject = require("../model/subject.model");
 const Notice = require("../model/notice.model");
 const Event = require("../model/event.model");
-const sequelize = require("./database");
+const sequelize = require("../config/database");
 const moment = require("moment");
 // Code for production testing
 async function addSampleDataBulk() {
