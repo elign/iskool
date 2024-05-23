@@ -56,32 +56,6 @@ async function addSampleDataBulk() {
     await Section.bulkCreate(sections);
     console.log("Sections added successfully (bulk)!");
 
-    // const classIds = [1, 2, 3];
-    // const subjects = [
-    //   { subjectName: "English" },
-    //   { subjectName: "Hindi" },
-    //   { subjectName: "Maths" },
-    //   { subjectName: "Science" },
-    //   { subjectName: "SST" },
-    // ];
-
-    // const subs = [];
-
-    // // Loop through class IDs and section IDs
-    // for (const classId of classIds) {
-    //   // Loop through subjects to find the corresponding one
-    //   for (const subject of subjects) {
-    //     // Assuming a unique subject name, use it as the key for efficient lookup
-    //     subs.push({
-    //       subjectName: subject.subjectName,
-    //       classId: classId,
-    //       sectionId: 1,
-    //     });
-    //   }
-    // }
-    // Subject.bulkCreate(subs);
-    // console.log("Sample subjects inserted successfully!");
-
     const students = [
       {
         userId: 3,
@@ -291,7 +265,22 @@ async function addSampleDataBulk() {
     console.log(`${numEvents} sample events created successfully!`);
 
     const numNotices = 10;
-    const notices = [];
+
+    // const subjects = [
+    //   { subjectName: "Maths", classId: 1, sectionId: 1 },
+    //   { subjectName: "Science", classId: 1, sectionId: 2 },
+    //   { subjectName: "History", classId: 2, sectionId: 1 },
+    //   { subjectName: "Geography", classId: 2, sectionId: 2 },
+    //   { subjectName: "English", classId: 3, sectionId: 1 },
+    //   { subjectName: "Physics", classId: 3, sectionId: 2 },
+    //   { subjectName: "Chemistry", classId: 4, sectionId: 1 },
+    //   { subjectName: "Biology", classId: 4, sectionId: 2 },
+    //   { subjectName: "Art", classId: 5, sectionId: 1 },
+    //   { subjectName: "Music", classId: 5, sectionId: 2 },
+    // ];
+
+    // await Subject.bulkCreate(subjects);
+    // console.log("Subjects added successfully!");
 
     for (let i = 0; i < numNotices; i++) {
       const notice = {

@@ -26,7 +26,9 @@ app.use(cookieParser());
 // Use this code in production to connect to the database
 // connectToDb();
 // Use this code while testing to create sample data in db
-addSampleDataBulk();
+(async () => {
+  await addSampleDataBulk();
+})();
 
 app.listen(port, () => console.log(`Iskool Backend listening on port ${port}`));
 app.use("/", userRouter);
