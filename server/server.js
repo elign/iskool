@@ -6,8 +6,8 @@ const studentRouter = require("./route/student.router");
 const eventRouter = require("./route/event.router");
 const noticeRouter = require("./route/notice.router");
 const cors = require("cors");
-const addSampleDataBulk = require("./config/addSampleData");
-const connectToDb = require("./config/connectToDb");
+const addSampleDataBulk = require("./utils/addSampleData");
+const connectToDb = require("./utils/connectToDb");
 require("dotenv").config();
 
 const port = process.env.PORT || 4000;
