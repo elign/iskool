@@ -18,6 +18,5 @@
     background-blend-mode: lighten; /* Choose the appropriate blend mode */
     position: relative;
     color: black; /* Adjust based on your needs */
-    padding: 20px;
   }
 </style>
