@@ -8,7 +8,7 @@
 <div class="flex items-center justify-center h-[70vh]">
   <Card.Root class="mx-auto max-w-sm shadow-md">
     <Card.Header>
-      <Card.Title class="text-2xl text-primary">Login</Card.Title>
+      <Card.Title class="text-2xl text-primary">Teacher Login</Card.Title>
       <Card.Description
         >Enter your email below to login to your account</Card.Description
       >

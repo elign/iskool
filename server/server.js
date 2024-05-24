@@ -24,11 +24,11 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 // Use this code in production to connect to the database
-// connectToDb();
+connectToDb();
 // Use this code while testing to create sample data in db
-(async () => {
-  await addSampleDataBulk();
-})();
+// (async () => {
+//   await addSampleDataBulk();
+// })();
 
 app.listen(port, () => console.log(`Iskool Backend listening on port ${port}`));
 app.use("/", userRouter);
