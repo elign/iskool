@@ -3,6 +3,32 @@
   import * as Card from "$lib/components/ui/card/index.js";
   import { Input } from "$lib/components/ui/input/index.js";
   import { Label } from "$lib/components/ui/label/index.js";
+  import { onMount } from "svelte";
+  import { goto } from "$app/navigation";
+  const VITE_API_URL = import.meta.env.VITE_API_URL;
+
+  let email: string, password: string;
+
+  async function handleSubmit(event: { preventDefault: () => void }) {
+    event.preventDefault();
+
+    const response = await fetch(`${VITE_API_URL}/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password, role: "teacher" }),
+    });
+
+    if (response.ok) {
+      console.log("Signup successful!");
+      goto("/"); // Redirect to login page
+    } else {
+      const error = await response.text();
+      console.error("Signup error:", error);
+      // Handle errors appropriately (e.g., display error message to user)
+    }
+  }
 </script>
 
 <div class="flex items-center justify-center min-h-[80vh]">
@@ -16,18 +42,22 @@
     <Card.Content>
       <div class="grid gap-4">
         <div class="grid gap-2">
-          <Label for="name">Name</Label>
-          <Input id="name" placeholder="Max" required />
-        </div>
-        <div class="grid gap-2">
           <Label for="email">Email</Label>
-          <Input id="email" type="email" placeholder="m@example.com" required />
+          <Input
+            id="email"
+            type="email"
+            placeholder="m@example.com"
+            required
+            bind:value={email}
+          />
         </div>
         <div class="grid gap-2">
           <Label for="password">Password</Label>
-          <Input id="password" type="password" />
+          <Input id="password" type="password" bind:value={password} />
         </div>
-        <Button type="submit" class="w-full">Create an account</Button>
+        <Button on:click={handleSubmit} type="submit" class="w-full"
+          >Create an account</Button
+        >
         <!-- <Button variant="outline" class="w-full">Sign up with GitHub</Button> -->
       </div>
       <div class="mt-4 text-center text-sm">
