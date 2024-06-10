@@ -9,7 +9,7 @@
   const VITE_API_URL = import.meta.env.VITE_API_URL;
 
   let email: string, password: string;
-  
+
   async function handleSubmit(event: { preventDefault: () => void }) {
     event.preventDefault();
 
@@ -23,7 +23,8 @@
 
     if (response.ok) {
       console.log("Signup successful!");
-      goto("/"); // Redirect to login page
+      toast.success("Signup successful!");
+      goto("/dashboard"); // Redirect to login page
     } else {
       const error = await response.text();
       console.error("Signup error:", error);
