@@ -32,7 +32,7 @@ const signUpUser = async (req, res) => {
     // Create JWT payload with user ID and role
     const payload = { user_id: newUser.user_id, role: newUser.role };
     const token = jwt.sign(payload, process.env.JWT_SECRET, {}); // Replace with your JWT secret
-    res.cookie("token", token).json({ message: "Login Successful" });
+    res.cookie("token", token).json({ message: "Signup Successful", newUser });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
@@ -58,7 +58,7 @@ const loginUser = async (req, res) => {
     // Create JWT payload with user ID and role
     const payload = { user_id: user.user_id, role: user.role };
     const token = jwt.sign(payload, process.env.JWT_SECRET, {}); // Replace with your JWT secret
-    res.cookie("token", token).json({ message: "Login Successful" });
+    res.cookie("token", token).json({ message: "Login Successful", user });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });

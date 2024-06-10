@@ -4,6 +4,7 @@
   import { Input } from "$lib/components/ui/input/index.js";
   import { Label } from "$lib/components/ui/label/index.js";
   import { onMount } from "svelte";
+  import { setUser } from "$lib/stores/user";
   import { toast } from "svelte-sonner";
   import { goto } from "$app/navigation";
   const VITE_API_URL = import.meta.env.VITE_API_URL;
@@ -22,7 +23,13 @@
     });
 
     if (response.ok) {
-      console.log("Signup successful!");
+      const user = await response.json();
+      console.log("Signup successful!", user);
+      setUser({
+        email: user.newUser.email,
+        role: user.newUser.role,
+        userId: user.newUser.userId,
+      });
       toast.success("Signup successful!");
       goto("/dashboard"); // Redirect to login page
     } else {
