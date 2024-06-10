@@ -4,11 +4,12 @@
   import { Input } from "$lib/components/ui/input/index.js";
   import { Label } from "$lib/components/ui/label/index.js";
   import { onMount } from "svelte";
+  import { toast } from "svelte-sonner";
   import { goto } from "$app/navigation";
   const VITE_API_URL = import.meta.env.VITE_API_URL;
 
   let email: string, password: string;
-
+  
   async function handleSubmit(event: { preventDefault: () => void }) {
     event.preventDefault();
 
@@ -26,6 +27,7 @@
     } else {
       const error = await response.text();
       console.error("Signup error:", error);
+      toast.error(error.split(":")[1].split('"')[1]);
       // Handle errors appropriately (e.g., display error message to user)
     }
   }
