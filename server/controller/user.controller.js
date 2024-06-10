@@ -7,7 +7,7 @@ const signUpUser = async (req, res) => {
 
   try {
     // Email validation and emptiness check
-    if (email==="") {
+    if (email === "") {
       return res.status(400).json({ message: "Empty email address" });
     }
     if (!validateEmail(email)) {
@@ -31,11 +31,8 @@ const signUpUser = async (req, res) => {
 
     // Create JWT payload with user ID and role
     const payload = { user_id: newUser.user_id, role: newUser.role };
-    const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    }); // Replace with your JWT secret
-
-    res.status(201).json({ message: "User created successfully", token });
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {}); // Replace with your JWT secret
+    res.cookie("token", token).json({ message: "Login Successful" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
