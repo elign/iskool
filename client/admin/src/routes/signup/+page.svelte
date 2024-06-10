@@ -31,7 +31,7 @@
   }
 </script>
 
-<div class="flex items-center justify-center min-h-[80vh]">
+<div class="flex items-center justify-center min-h-[70vh]">
   <Card.Root class="mx-auto max-w-md shadow-md">
     <Card.Header>
       <Card.Title class="text-2xl text-primary">Sign Up</Card.Title>
