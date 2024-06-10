@@ -1,10 +1,24 @@
 const jwt = require("jsonwebtoken");
 const User = require("../model/user.model");
+const { validateEmail } = require("../utils/validateEmail");
 const bcrypt = require("bcrypt");
 const signUpUser = async (req, res) => {
   const { email, password, role } = req.body;
 
   try {
+    // Email validation and emptiness check
+    if (email==="") {
+      return res.status(400).json({ message: "Empty email address" });
+    }
+    if (!validateEmail(email)) {
+      return res.status(400).json({ message: "Invalid Email address" });
+    }
+    // Password length check
+    if (password.length !== 8) {
+      return res
+        .status(400)
+        .json({ message: "Password must be 8 characters long" });
+    }
     // Check for existing user with the same email
 
     const existingUser = await User.findOne({ where: { email } });
