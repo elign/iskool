@@ -5,7 +5,7 @@ export interface User {
 }
 
 export interface Event {
-  date: string;
+  date: DateValue | undefined;
   eventName: string;
   description: string;
   eventType: string;
