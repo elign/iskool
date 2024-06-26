@@ -43,10 +43,16 @@
 
   async function handleSubmit(event: { preventDefault: () => void }) {
     event.preventDefault();
-    console.log(date);
+    if (!date) {
+      message = "Please select a date for the event.";
+      return; // Prevent further execution if date is missing
+    }
+    const formattedDate = date?.toString();
+    const apiDate: Date = new Date(formattedDate as string);
+    console.log(apiDate, eventType);
     try {
       const response = await createEvent({
-        date,
+        date: apiDate,
         eventName,
         description,
         eventType,
@@ -73,13 +79,13 @@
       <h2 class="text-2xl font-semibold">Monthly Planner</h2>
       <div>
         <Label for="date">Date:</Label>
-        <br/>
+        <br />
         <Popover.Root openFocus>
           <Popover.Trigger asChild let:builder>
             <Button
               variant="outline"
               class={cn(
-                "w-[280px] justify-start text-left font-normal",
+                "w-full justify-start text-left font-normal",
                 !date && "text-muted-foreground"
               )}
               builders={[builder]}
@@ -105,9 +111,12 @@
       </div>
       <div>
         <Label for="eventType">Event Type:</Label>
-        <Select.Root>
-          <Select.Trigger class="w-[180px]">
-            <Select.Value placeholder="Theme" />
+        <Select.Root
+          selected={eventType}
+          onSelectedChange={(v:String) => {}
+        >
+          <Select.Trigger class="w-full">
+            <Select.Value placeholder="Select" />
           </Select.Trigger>
           <Select.Content>
             <Select.Item value="holiday">Holiday</Select.Item>
