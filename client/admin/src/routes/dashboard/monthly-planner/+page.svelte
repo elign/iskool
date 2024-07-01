@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { toast } from "svelte-sonner";
   import { fetchEvents, createEvent } from "./api";
   import type { Event } from "$lib/types";
   import { Input } from "$lib/components/ui/input";
@@ -26,9 +27,14 @@
   let date: DateValue | undefined = undefined;
   let eventName: string = "";
   let description: string = "";
-  let eventType: string = "";
+  let eventType: { value: string; label: string } = { value: "", label: "" };
   let message: string = "";
-
+  const eventTypeOptions = [
+    { value: "holiday", label: "Holiday" },
+    { value: "festival", label: "Festival" },
+    { value: "competition", label: "Competition" },
+    { value: "exam", label: "Exam" },
+  ];
   onMount(async () => {
     await loadEvents();
   });
@@ -49,22 +55,21 @@
     }
     const formattedDate = date?.toString();
     const apiDate: Date = new Date(formattedDate as string);
-    console.log(apiDate, eventType);
     try {
       const response = await createEvent({
         date: apiDate,
         eventName,
         description,
-        eventType,
+        eventType: eventType.value,
       });
       if (response.ok) {
-        message = "Event created successfully!";
+        toast.success("Event has been created");
         await loadEvents();
       } else {
-        message = "Failed to create event.";
+        toast.error("Failed to create event.");
       }
     } catch (error) {
-      message = "Failed to create event.";
+      toast.error("Failed to create event.");
       console.error("Failed to create event:", error);
     }
   }
@@ -112,17 +117,19 @@
       <div>
         <Label for="eventType">Event Type:</Label>
         <Select.Root
+          items={eventTypeOptions}
           selected={eventType}
-          onSelectedChange={(v:String) => {}
+          onSelectedChange={(v) => {
+            v && (eventType = { value: v.value, label: v.label || "" });
+          }}
         >
           <Select.Trigger class="w-full">
-            <Select.Value placeholder="Select" />
+            <Select.Value placeholder={`${eventType.label}` || `Select`} />
           </Select.Trigger>
           <Select.Content>
-            <Select.Item value="holiday">Holiday</Select.Item>
-            <Select.Item value="festival">Festival</Select.Item>
-            <Select.Item value="competition">Competition</Select.Item>
-            <Select.Item value="exam">Exam</Select.Item>
+            {#each eventTypeOptions as option}
+              <Select.Item value={option.value}>{option.label}</Select.Item>
+            {/each}
           </Select.Content>
           <Select.Input name="eventType" bind:value={eventType} />
         </Select.Root>
