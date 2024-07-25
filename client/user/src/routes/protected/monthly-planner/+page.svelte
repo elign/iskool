@@ -1,28 +1,38 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+
   interface Event {
     date: string;
-    title: string;
+    eventName: string;
     description: string;
     eventType: string;
   }
   let events: Event[] = [];
 
-  async function loadEvents(): Promise<Event[]> {
+  export async function fetchEvents(): Promise<Event[]> {
+    const response = await fetch("http://localhost:4000/events/current");
+    if (!response.ok) {
+      throw new Error("Failed to fetch events");
+    }
+    return response.json();
+  }
+
+  onMount(async () => {
+    await loadEvents();
+  });
+
+  async function loadEvents() {
     try {
-      const response = await fetch("http://localhost:4000/current");
-      if (response.ok) {
-        const eventsData = await response.json();
-        return eventsData as Event[]; // Assuming response is an array of events
-      } else {
-        throw new Error("Failed to load events.");
-      }
+      events = await fetchEvents();
     } catch (error) {
-      console.error("Error loading events:", error);
-      return []; // Return empty array on error (optional)
+      console.error("Failed to load events:", error);
     }
   }
-  async function onMount() {
-    events = await loadEvents();
+
+  function extractDate(dateString: string) {
+    const dateObject = new Date(dateString);
+    const day = String(dateObject.getDate()).padStart(2, "0");
+    return day;
   }
 </script>
 
@@ -31,11 +41,13 @@
   <h3 class="text-xl">April 2024</h3>
   {#each events as event}
     <div class="flex gap-3 items-center my-5">
-      <h4 class="font-semibold text-4xl text-primary">{event.date}</h4>
+      <h4 class="font-semibold text-4xl text-primary">
+        {extractDate(event.date)}
+      </h4>
       <div
         class="w-full px-2 pt-2 pb-3 rounded-md border-l-4 border-primary bg-primary-foreground"
       >
-        <h4 class="text-sm leading-6 font-medium">{event.title}</h4>
+        <h4 class="text-sm leading-6 font-medium">{event.eventName}</h4>
         <p class="text-xs">{event.description}</p>
       </div>
     </div>

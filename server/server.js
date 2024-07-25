@@ -11,9 +11,19 @@ const connectToDb = require("./utils/connectToDb");
 require("dotenv").config();
 
 const port = process.env.PORT || 4000;
+const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",") || [
+  "http://localhost:5173",
+]; // Default to localhost
+
 const corsOptions = {
-  origin: process.env.CLIENT_URL,
-  credentials: true, //access-control-allow-credentials:true
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Origin not allowed by CORS"));
+    }
+  },
+  credentials: true,
   optionSuccessStatus: 200,
 };
 
